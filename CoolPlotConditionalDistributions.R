@@ -1,6 +1,7 @@
-rm(list=ls())
+cond_probs_dfrm(list=ls())
 require(depmixS4)
 require(ggplot2)
+require(reshape2)
 
 ###############
 # IMPORT DATA #
@@ -36,6 +37,10 @@ for(t in 2:nrow(data_analysis)) {
   }
   cond_probs[t,] <- cond_probs[t,]/sum(cond_probs[t,])
 }
+
+cond_probs_df <- melt(cond_probs)
+
+ggplot(cond_probs[175,]) + geom_density()
 
 plot(x_seq,cond_probs[15,],type="l",ylab='',xlab='',main='')
 abline(v=data_analysis$Activity[15], col="red")
