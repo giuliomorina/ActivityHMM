@@ -10,8 +10,8 @@ StateProbsPlot <- function(data_analysis, HMMpost){
   x[, 3] <- x[, 2] + HMMpost[, 4]
   x <- as.data.frame(x)
   pl <- ggplot(cbind(data_analysis, x), aes(Time))
-  pl <- pl + geom_ribbon(aes(ymin=0, ymax=V1), fill = "lightgreen") + geom_line(aes(y=V1))
-  pl <- pl + geom_ribbon(aes(ymin=V1, ymax=V2), fill = "lightsalmon") + geom_line(aes(y=V2))
+  pl <- pl + geom_ribbon(aes(ymin=0, ymax=V1), fill = "lightsalmon") + geom_line(aes(y=V1))
+  pl <- pl + geom_ribbon(aes(ymin=V1, ymax=V2), fill = "lightgreen") + geom_line(aes(y=V2))
   pl <- pl + geom_ribbon(aes(ymin=V2, ymax=V3), fill = "lightblue")
   pl
 }

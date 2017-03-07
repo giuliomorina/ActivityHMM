@@ -74,3 +74,14 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
     }
   }
 }
+
+relabelStatus <- function(summaryfm_orig, HMMpost_orig) {
+  relabel <- sort(summaryfm_orig[,1], index.return=TRUE)
+  summaryfm_orig2 <- summaryfm_orig[relabel$ix,]
+  HMMpost_orig2 <- HMMpost_orig[,c(1,(relabel$ix+1))]
+  for(i in 1:nrow(HMMpost_orig2)) {
+    HMMpost_orig2[i,1] <- which.max(HMMpost_orig2[i,2:(nrow(summaryfm_orig)+1)])
+  }
+  colnames(HMMpost_orig2) <- colnames(HMMpost_orig)
+  return(list(summaryfm_orig2,HMMpost_orig2))
+}
