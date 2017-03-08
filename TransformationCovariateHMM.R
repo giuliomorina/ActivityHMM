@@ -9,9 +9,9 @@ source("StateProbsPlot.R")
 # IMPORT DATA #
 ###############
 save_imgs <- TRUE
-#data_analysis <- read.csv("Data/Subject_1_(19).csv"); title_subj <- "Subject 1"
+data_analysis <- read.csv("Data/Subject_1_(19).csv"); title_subj <- "Subject 1"
 #data_analysis <- read.csv("Data/Subject_2_(21).csv"); title_subj <- "Subject 2"
-data_analysis <- read.csv("Data/Subject_3_(23).csv"); title_subj <- "Subject 3"
+#data_analysis <- read.csv("Data/Subject_3_(23).csv"); title_subj <- "Subject 3"
 data_analysis$Time <- as.POSIXct(data_analysis$Time, format = "00%y-%m-%d %H:%M:%S") #Specify that this is a date-time
 
 ##################
@@ -40,11 +40,11 @@ summaryfm <- reshuffle[[1]]
 HMMpost <- reshuffle[[2]]
 plot_trans <- TimeSeriesStateMeansPlot(data_transformed,HMMpost,summaryfm) + 
   ggtitle(paste(title_subj," - HMM Transformed Data",sep="")) +
-  scale_color_manual(labels = c("State 1", "State 2","State 3"), values = c("red", "darkgreen","blue"), name="") 
+  scale_color_manual(labels = c("State 1", "State 2","State 3"), values = c("red", "darkgreen","yellow"), name="") 
 prob_plot_trans <- StateProbsPlot(data_transformed, HMMpost) + 
   ggtitle(paste(title_subj," - HMM Transformed Data",sep="")) +
   labs(y = "Probability") +
-  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","lightblue"), name="")
+  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","yellow"), name="")
 
 #######################
 # HMM NOT TRANSFORMED #
@@ -65,7 +65,7 @@ plot_orig <- TimeSeriesStateMeansPlot(data_analysis,HMMpost_orig,summaryfm_orig)
   scale_color_manual(labels = c("State 1", "State 2","State 3"), values = c("red", "darkgreen","yellow"), name="")  
 prob_plot_orig <- StateProbsPlot(data_analysis, HMMpost_orig) + ggtitle(paste(title_subj," - HMM Original Data",sep="")) +
   labs(y = "Probability") +
-  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","lightblue"), name="")
+  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","yellow"), name="")
 
 #################
 # ADD COVARIATE #
@@ -91,7 +91,7 @@ plot_orig_cov <- TimeSeriesStateMeansPlot(data_analysis,HMMpost_covariate_origin
 prob_plot_orig_cov <- StateProbsPlot(data_analysis, HMMpost_covariate_original) + 
   ggtitle(paste(title_subj," - HMM Original Data + Covariate",sep="")) +
   labs(y = "Probability") +
-  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","lightblue"), name="")
+  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","yellow"), name="")
 
 
 #Model on transformed dataset (sqrt)
@@ -113,7 +113,7 @@ plot_transf_cov <- TimeSeriesStateMeansPlot(data_analysis = data_transformed,HMM
 prob_plot_trans_cov <- StateProbsPlot(data_transformed, HMMpost_covariate_transf) +
   ggtitle(paste(title_subj," - HMM Transformed Data + Covariate",sep="")) +
   labs(y = "Probability") +
-  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","lightblue"), name="")
+  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","yellow"), name="")
 
 
 ########################
@@ -134,7 +134,7 @@ plot_resp_orig <- TimeSeriesStateMeansPlot(data_analysis,HMMpost_resp_orig,summa
   scale_color_manual(labels = c("State 1", "State 2","State 3"), values = c("red", "darkgreen","yellow"), name="") 
 prob_plot_resp_orig <- StateProbsPlot(data_analysis, HMMpost_resp_orig) + ggtitle(paste(title_subj," - HMM Original Data + Temp as response",sep="")) +
   labs(y = "Probability") +
-  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","lightblue"), name="")
+  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","yellow"), name="")
 
 mod_resp_transf <- depmix(response = list(Activity ~ 1, Temp ~ 1), data=data_transformed, family=list(gaussian(),gaussian()), nstates = 3)
 set.seed(1503)
@@ -150,7 +150,7 @@ plot_resp_transf <- TimeSeriesStateMeansPlot(data_transformed,HMMpost_resp_trans
   scale_color_manual(labels = c("State 1", "State 2","State 3"), values = c("red", "darkgreen","yellow"), name="") 
 prob_plot_resp_trans <- StateProbsPlot(data_transformed, HMMpost_resp_transf) + ggtitle(paste(title_subj," - HMM Transformed Data + Temp as response",sep="")) +
   labs(y = "Probability") +
-  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","lightblue"), name="")
+  scale_fill_manual(labels = c("State 1", "State 2","State 3"), values = c("lightsalmon", "lightgreen","yellow"), name="")
 
 
 
