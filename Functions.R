@@ -75,6 +75,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   }
 }
 
+
 relabelStatus <- function(summaryfm_orig, HMMpost_orig) {
   relabel <- sort(summaryfm_orig[,1], index.return=TRUE)
   summaryfm_orig2 <- summaryfm_orig[relabel$ix,]
